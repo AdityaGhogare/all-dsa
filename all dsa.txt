@@ -1,0 +1,1848 @@
+//SLIP 1 Q1
+#include<stdio.h>
+#include"doubly.h"
+   int main()
+    {
+          struct node *head=NULL;
+          int ch;
+          do
+           {
+                      printf("Enter your chioce= 1-create \n 2-disp= ");
+                          scanf("%d",&ch);
+                      switch(ch)
+                       {
+                            case 1:head=create(head);
+                                    break;
+                            case 2:disp(head);
+                                   break;       
+                       }    
+           }while(ch<3);
+    }
+//Q2
+#include<stdio.h>
+#include<stdlib.h>
+   struct node 
+     {
+        int data;
+        struct node *next;
+     };
+  struct node *create(struct node *head)
+   {
+           int i,n;
+           struct node *newnode,*temp;
+           printf("Enter no of nodes= ");
+             scanf("%d",&n);
+           printf("Enter val= ");    
+             for(i=0;i<n;i++)
+              {
+                  newnode=(struct node *)malloc(sizeof(struct node));
+                    scanf("%d",&newnode->data);
+                    newnode->next=NULL;
+                 if(head==NULL)
+                  temp=head=newnode;
+               else
+                 {
+                  temp->next=newnode;
+                  temp=newnode;
+                 }   
+              }
+              return head;   
+    }
+  void disp(struct node *head)
+   {
+      struct node *temp;
+      for(temp=head;temp!=NULL;temp=temp->next)
+        {
+            printf("%d\t",temp->data);
+        }
+      }  
+struct node *sort(struct node *head)
+ {
+          struct node *i,*j;
+          int t;
+          for(i=head;i!=NULL;i=i->next)
+            {
+             for(j=head;j!=NULL;j=j->next)
+                {
+                       if(i->data<j->data)
+                         {
+                               t=i->data;
+                               i->data=j->data;
+                               j->data=t;
+                         }
+                }
+            }
+            return head;
+ }
+ int main()
+    {
+          struct node *head=NULL;
+          int ch;
+          do
+           {
+                      printf("Enter your chioce= 1-create \n 2-disp \n 3-sort= ");
+                          scanf("%d",&ch);
+                      switch(ch)
+                       {
+                            case 1:head=create(head);
+                                    break;
+                            case 2:disp(head);
+                                   break;  
+                            case 3:head=sort(head);
+                                  break;              
+                       }    
+           }while(ch<4);
+    }
+----------------------------------------------------------------------------------------------------------------------------------------------------------      
+ SLIP 2
+ Q1 
+ #include<stdio.h>
+#include"doubly.h"
+   int main()
+    {
+          struct node *head=NULL;
+          int ch;
+          do
+           {
+                      printf("Enter your chioce= 1-create \n 2-disp= ");
+                          scanf("%d",&ch);
+                      switch(ch)
+                       {
+                            case 1:head=create(head);
+                                    break;
+                            case 2:disp(head);
+                                   break;       
+                       }    
+           }while(ch<3);
+    }
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------   
+SLIP 3
+Q1 
+#include<stdio.h>
+#include<stdlib.h>
+   void insertion(int a[],int n)
+    {
+        int i,j,key;
+        for(i=1;i<n;i++)
+          {
+             key=a[i];
+            for(j=i-1;j>=0;j--)
+              {
+                    if(a[j]>key)
+                     a[j+1]=a[j];
+                  else
+                     break; 
+              }
+              a[j+1]=key;
+          }
+    } 
+ int main()
+  {
+      int a[10],i,n;
+      printf("Enter limit= ");
+       scanf("%d",&n);
+     printf("Enter elements= ");
+       for(i=0;i<n;i++)
+         {
+               scanf("%d",&a[i]);
+         }
+     insertion(a,n); 
+     printf("Sorted  elements= ");
+       for(i=0;i<n;i++)
+         {
+               printf("%d\n",a[i]);
+         }      
+  } 
+ Q2
+ #include<stdio.h>
+#include <ctype.h>
+#define MAX 100
+  struct stack
+    {
+         int top;
+         int a[MAX];
+    }s;
+ void init()
+  {
+     s.top=-1;
+  }   
+int isempty()
+ {
+     if(s.top==-1) 
+       return 1;
+     else
+       return 0;  
+ }  
+int isfull()
+ {
+     if(s.top==MAX-1) 
+       return 1;
+     else
+       return 0;  
+ }
+ void push(int ch)
+  {
+       if(isfull())
+         printf("Stack is full");
+       else
+         {    
+             s.top++;       
+             s.a[s.top]=ch;
+         }  
+  } 
+ int pop()
+   {
+      int ch;
+      if(isempty())
+        printf("Stack is empty");
+      else
+        {
+           ch=s.a[s.top];
+           s.top--;           
+               return ch; 
+        }  
+   } 
+   int peek()
+    {
+       return s.a[s.top];
+    }
+   int main()
+    {
+        char postfix[10],ch;
+        int i,val1,val2,a,b,c,d,res;
+        printf("Enter postfix expersion= ");
+           scanf("%s",postfix);
+        printf("Enter the values if A B C D=");
+           scanf("%d%d%d%d",&a,&b,&c,&d);   
+        init();
+        for(i=0;postfix[i]!='\0';i++) 
+         {
+               ch=postfix[i];
+               if(isalpha(ch))
+                 {
+                    switch(ch)
+                     {
+                           case 'A':push(a);break;
+                           case 'B':push(b);break;
+                           case 'C':push(c);break;
+                           case 'D':push(d);break;
+                     }
+                 }
+             else
+               {
+                    val1=pop();
+                    val2=pop();
+                     switch(ch)
+                       {
+                            case '+':res=val1+val2;
+                                         break;
+                            case '-':res=val2-val1;
+                                         break;
+                             case '*':res=val2*val1;
+                                         break;
+                              case '/':res=val2/val1;
+                                         break;                                       
+                       }
+                       push(res);
+               }    
+         }
+         printf("\n RESULT= %d",pop());   
+    }   
+----------------------------------------------------------------------------------------------------------------------------------------------------------    
+  SLIP 4
+  Q1 
+  #include<stdio.h>
+#include<stdlib.h>
+   void bubble(int a[],int n)
+    {
+        int i,pass,t;
+        for(pass=1;pass<n;pass++)
+          {
+             for(i=0;i<n-pass;i++)
+               {
+                    if(a[i]>a[i+1])
+                      {
+                             t=a[i];
+                             a[i]=a[i+1];
+                             a[i+1]=t;
+                      }
+               }
+          }
+    } 
+ int main()
+  {
+      int a[10],i,n;
+      printf("Enter limit= ");
+       scanf("%d",&n);
+     printf("Enter elements= ");
+       for(i=0;i<n;i++)
+         {
+               scanf("%d",&a[i]);
+         }
+     bubble(a,n); 
+     printf("Sorted  elements= ");
+       for(i=0;i<n;i++)
+         {
+               printf("%d\n",a[i]);
+         }      
+  }   
+  Q2 
+  #include<stdio.h>
+#include <stdlib.h>
+#define MAX 10
+ struct queue 
+ { 
+     int a[MAX];
+     int front,rear;
+ }*q;
+void initq()
+  { 
+     q = (struct queue *)malloc(sizeof(struct queue));
+     q->front=q->rear=-1;
+  }
+ int isempty()
+  {
+    if(q->front==-1)
+      return 1;
+    else
+       return 0;   
+  }
+ int isfull()
+  {
+    if(q->rear==MAX-1)
+      return 1;
+    else
+       return 0;   
+  }
+void enque(int num)
+ {
+   if(isfull())
+    {
+       printf("Queue is overflow");
+    }   
+  else
+    {
+        if(q->front==-1)
+           q->front=0;
+           q->rear++;
+           q->a[q->rear]=num;
+           printf("Inserted successfully.........");
+    }  
+ }
+void deque()
+ {
+      int num;
+      if(isempty())
+        printf("Queue is empty");
+     else
+       {
+           num=q->a[q->front];
+           q->front++;
+           printf("Deleted successfully..........");  
+       }   
+ }
+ void reverse()
+  {
+     int i;
+     for(i=q->rear;i>=q->front;i--)
+      {
+         printf("%d\t",q->a[i]);
+      }
+   }
+ int main()
+  {
+       int ch,num;
+       initq();
+      do
+       {
+         printf("Enter your chioce= 1-enque \n 2-deque \n 3-reverse= ");
+           scanf("%d",&ch);
+         switch(ch)
+          {
+             case 1: printf("Enter number= ");
+                          scanf("%d",&num);
+                          enque(num);
+                         break;
+             case 2:deque();
+                          break;
+             case 3:reverse();
+                          break;                          
+          }  
+       }while(ch<4);
+  } 
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------   
+ SLIP 5
+ Q1
+#include<stdio.h>
+  void selection(int a[],int n)
+   {
+         int min,pos,i,j,t;
+          for(i=0;i<n-1;i++)
+            {
+                 min=a[i];
+                 pos=i;
+                 for(j=i+1;j<n;j++)
+                  {
+                     if(a[j]<min)
+                       {
+                           min=a[j];pos=j;
+                       }
+                  }
+                  t=a[i];
+                  a[i]=a[pos];
+                  a[pos]=t;  
+            }
+   }
+ int main()
+  {
+      int a[10],i,n;
+      printf("Enter limit= ");
+        scanf("%d",&n);
+      printf("Enter n numbers= ");
+        for(i=0;i<n;i++)
+          {
+              scanf("%d",&a[i]);
+          }
+       selection(a,n);
+       printf("Sorted numbers= ");
+        for(i=0;i<n;i++)
+          {
+              printf("%d\n",a[i]);
+          }           
+  }   
+ Q2
+ #include<stdio.h>
+#include<stdlib.h>
+ struct queue
+   {
+       int data;
+       struct queue *next;
+   }*front,*rear,*newnode;
+ void init()
+  {
+      front=rear=NULL;  
+  }
+ int isempty()
+  {
+      if(front==NULL)
+       return 1;
+      else
+        return 0; 
+  } 
+ void insert(int num)
+  {
+        newnode=(struct queue *)malloc(sizeof(struct queue));
+        newnode->data=num;
+        if(front==NULL)
+          {
+             front=rear=newnode;
+          }
+        else
+         {  
+          rear->next=newnode;
+          rear=newnode;
+         } 
+  }
+  void delq()
+   {
+      int num;
+      struct queue *p;
+      if(isempty())
+        {
+             printf("queue is underflow");
+        }
+      p=front;
+      num=front->data;
+      front=front->next;
+      free(p);
+   }
+   void disp()
+    {
+         struct queue *temp;
+         for(temp=front;temp!=NULL;temp=temp->next)
+          {
+              printf("%d\n",temp->data);
+          }
+    }
+  int main()
+   {
+        int ch,num;
+        init();
+        do
+          {
+             printf("Enter chioce= 1-insert \n 2-del \n 3-disp=  ");
+               scanf("%d",&ch);
+            switch(ch)
+              {
+                   case 1:printf("Enter no= ");
+                                scanf("%d",&num);
+                             insert(num);   
+                             break;
+                  case 2:delq();
+                               break;
+                    case 3:disp();
+                               break;                        
+              }   
+          }while(ch<4);
+   }     
+------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+SLIP 6
+Q1
+#include<stdio.h>
+int quicksort(int a[],int start,int end)
+ {
+       int pivot,i,j,t;
+       pivot=a[start];
+       i=start+1;
+       j=end;
+       do
+        {
+       while(a[i]<pivot && i<=end)
+         {
+               i++;
+         }
+      while(a[j]>pivot && j>=start)
+        {
+            j--;
+        }
+        if(i<j)
+         {
+            t=a[i];
+            a[i]=a[j];
+            a[j]=t;
+         }
+        }while(i<j); 
+     a[start]=a[j];
+     a[j]=pivot;
+     return j;     
+ }
+ void partition(int a[],int start,int end)
+  {
+      if(start<end)
+       {
+      int j=quicksort(a,start,end);
+      partition(a,start,j-1);
+      partition(a,j+1,end);
+  }
+  }
+   int main()
+     {
+          int a[10],i,n;
+          printf("Enter limit= ");
+             scanf("%d",&n);
+         printf("Enter array elements=");
+           for(i=0;i<n;i++)
+            {
+               scanf("%d",&a[i]);
+            }
+          partition(a,0,n-1);
+          printf("Sorted elements=");
+           for(i=0;i<n;i++)
+            {
+               printf("%d\n",a[i]);
+            }        
+     } 
+Q2
+#include<stdio.h>
+#define MAX 5
+  struct stack
+  {
+       int a[MAX];
+       int top;
+  }s;
+  void init()
+   {
+      s.top=-1;
+   }
+ int isempty()
+  {
+       if(s.top==-1)
+         return 1;
+      else
+         return 0;   
+  }  
+ int isfull()
+  {
+       if(s.top==MAX-1)
+         return 1;
+      else
+         return 0;   
+  }
+  void push(char ch)
+   {
+         if(isfull())
+          printf("Stack is overflow");
+        else
+          {
+              s.top++;
+              s.a[s.top]=ch;
+          }  
+   }
+  char pop()
+   {
+       char ch;
+       if(isempty())
+         printf("Stack is underflow");
+       else
+         {
+              ch=s.a[s.top];
+              s.top--;
+            return ch;  
+         }
+   }     
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+SLIP 7
+Q1
+#include<stdio.h>
+#include"singlylist.h"
+   int main()
+    {
+          struct node *head=NULL;
+          int ch,num;
+          do
+           {
+                      printf("Enter your chioce= 1-create \n 2-disp \n 3-del= ");
+                          scanf("%d",&ch);
+                      switch(ch)
+                       {
+                            case 1:head=create(head);
+                                    break;
+                            case 2:disp(head);
+                                   break;   
+                            case 3:printf("Enter number= ");
+                                         scanf("%d",&num);
+                                         del(head,num);
+                                         break;
+                                                    
+                       }    
+           }while(ch<4);
+    }
+-------------------------------------------------------------------------------------------------------------------------------------------------
+SLIP 8
+Q1
+#include<stdio.h>
+void countsort(int a[],int k,int n)
+ {
+       int i,c[20]={0},b[20];
+          for(i=0;i<n;i++)
+            {
+                c[a[i]]=c[a[i]]+1;
+            }
+          for(i=1;i<=k;i++)
+            {
+                c[i]=c[i]+c[i-1];
+            } 
+         for(i=n-1;i>=0;i--)
+           {
+               b[c[a[i]]-1]=a[i];
+               c[a[i]]--;
+           }
+           printf("Sorted array= ");
+       for(i=0;i<n;i++)
+        {
+             printf("%d\n",b[i]);
+        }      
+ }
+int main()
+ {
+       int a[20],i,n,k;
+       printf("Enter limit= ");
+          scanf("%d",&n);
+      printf("Enter key= ");
+         scanf("%d",&k);    
+      printf("Enter numbers= ");
+        for(i=0;i<n;i++)
+          {
+              scanf("%d",&a[i]);
+          }
+      countsort(a,k,n);
+            
+ } 
+Q2
+#include<stdio.h>
+#include"st_queue.h"
+ int main()
+  {
+       int ch,num;
+       init();
+       do
+         {
+              printf("Enter your chioce= ");
+              printf("1-add \n 2-peek= ");
+              scanf("%d",&ch);
+              switch(ch)
+                {
+                   case 1:printf("Enter number to insert=  ");
+                                scanf("%d",&num);
+                               add(num);
+                              break;
+                  case 2: printf("Peek elemnet= %d",peek());
+                              break;               
+                }
+         }while(ch<3);
+  }
+ ----------------------------------------------------------------------------------------------------------------------------------------------------
+SLIP 9
+ Q1
+ #include<stdio.h>
+#include"stack.h"
+  int main()
+    {
+          int ch,num;
+          init();
+          do
+           {
+               printf("Enter your choice= 1-push \n 2-pop= ");
+                 scanf("%d",&ch);
+              switch(ch)
+               {
+                   case 1:printf("Enter number to push= ");
+                                scanf("%d",&num);
+                               push(num);
+                             break;
+                 case 2:pop();  
+                            break;             
+               }    
+           }while(ch<3);
+    }
+  Q2  
+ #include<stdio.h>
+  void bubble(int a[],int n)
+   {
+         int t,pass,i;
+         for(pass=1;pass<n;pass++)
+          {
+             for(i=0;i<n-pass;i++)
+               {
+                  if(a[i]>a[i+1])
+                    {
+                       t=a[i];
+                       a[i]=a[i+1];
+                       a[i+1]=t;
+                    }
+               }
+          }
+   }
+  int main()
+   {
+       int a[10],i,n;
+        printf("Enter limit= ");
+          scanf("%d",&n);
+       printf("Enter array elements= ");
+        for(i=0;i<n;i++)
+         {
+            scanf("%d",&a[i]);
+         } 
+       bubble(a,n);
+        printf("Sorted array elements= ");
+        for(i=0;i<n;i++)
+         {
+            printf("%d\n",a[i]);
+         }     
+   } 
+  -----------------------------------------------------------------------------------------------------------------------------------------------
+  SLIP 10
+  Q1
+ #include<stdio.h>
+#include"singlylist.h"
+   int main()
+    {
+          struct node *head=NULL;
+          int ch,num;
+          do
+           {
+                      printf("Enter your chioce= 1-create \n 2-disp \n 3-reverse= ");
+                          scanf("%d",&ch);
+                      switch(ch)
+                       {
+                            case 1:head=create(head);
+                                    break;
+                            case 2:disp(head);
+                                   break;   
+                            case 3:head=reverse(head);
+                                         break;
+                                                    
+                       }    
+           }while(ch<4);
+    }
+----------------------------------------------------------------------------------------------------------------------------------------------------  
+SLIP 11
+Q1
+#include<stdio.h>
+void countsort(int a[],int k,int n)
+ {
+       int i,c[20]={0},b[20];
+          for(i=0;i<n;i++)
+            {
+                c[a[i]]=c[a[i]]+1;
+            }
+          for(i=1;i<=k;i++)
+            {
+                c[i]=c[i]+c[i-1];
+            } 
+         for(i=n-1;i>=0;i--)
+           {
+               b[c[a[i]]-1]=a[i];
+               c[a[i]]--;
+           }
+           printf("Sorted array= ");
+       for(i=0;i<n;i++)
+        {
+             printf("%d\n",b[i]);
+        }      
+ }
+int main()
+ {
+       int a[20],i,n,k;
+       printf("Enter limit= ");
+          scanf("%d",&n);
+      printf("Enter key= ");
+         scanf("%d",&k);    
+      printf("Enter numbers= ");
+        for(i=0;i<n;i++)
+          {
+              scanf("%d",&a[i]);
+          }
+      countsort(a,k,n);
+            
+ }
+Q2
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+ {
+    int coef,pow;
+    struct node *next;
+ };
+struct node *create(struct node *head)
+ {
+    struct node *temp,*newnode;
+    int i,n;
+    printf("Enter no of nodes= ");
+      scanf("%d",&n);
+     for(i=0;i<n;i++)
+      {
+           newnode=(struct node *)malloc(sizeof(struct node));
+           printf("Enter coefficent and pow= ");
+             scanf("%d%d",&newnode->coef,&newnode->pow);
+           newnode->next=NULL;
+             if(head==NULL)
+              temp=head=newnode;
+            else
+              {
+                 temp->next=newnode;
+                 temp=newnode;                 
+              }  
+      }
+      return head;   
+ }
+ void disp(struct node *head)
+  {
+      struct node *temp;
+      for(temp=head;temp!=NULL;temp=temp->next)
+       {
+          printf("%dX^ %d+\t",temp->coef,temp->pow);
+       }
+  } 
+void add(struct node *head1,struct node *head2,struct node *head3)
+  {
+      struct node *temp1=head1,*temp2=head2,*temp3,*newnode;
+        while(temp1!=NULL && temp2!=NULL)
+          {
+              newnode=(struct node *)malloc(sizeof(struct node));
+              newnode->next=NULL;
+              if(temp1->pow>temp2->pow)
+               {
+                  newnode->coef=temp1->coef;
+                  newnode->pow=temp1->pow;
+                  temp1=temp1->next;
+               }
+             else if(temp1->pow<temp2->pow)
+               {
+                  newnode->coef=temp2->coef;
+                  newnode->pow=temp2->pow;
+                  temp2=temp2->next;
+               } 
+               else 
+               {
+                  newnode->coef=temp1->coef+temp2->coef;
+                  newnode->pow=temp2->pow;
+                  temp1=temp1->next;
+                  temp2=temp2->next;  
+               }
+               if(head3==NULL)
+                  head3=temp3=newnode;
+               else
+                 {
+                     temp3->next=newnode;
+                     temp3=newnode;
+                 }   
+          }
+         while(temp1!=NULL)
+           {
+              newnode=(struct node *)malloc(sizeof(struct node));
+              newnode->next=NULL;
+             newnode->coef=temp1->coef;
+                  newnode->pow=temp1->pow;
+                  temp1=temp1->next;
+                  temp3->next=newnode;
+                  temp3=newnode; 
+           } 
+         while(temp2!=NULL)
+           {
+              newnode=(struct node *)malloc(sizeof(struct node));
+              newnode->next=NULL;
+             newnode->coef=temp2->coef;
+                  newnode->pow=temp2->pow;
+                  temp2=temp2->next;
+                  temp3->next=newnode;
+                  temp3=newnode; 
+           }
+           disp(head3);            
+  }
+  void main()
+   {
+      struct node *head1=NULL,*head2=NULL,*head3=NULL;
+      printf("\nEnter Polynomail 1=");
+      head1=create(head1);
+      printf("\nEnter Polynomail 2=");
+      head2=create(head2);
+      printf("\nPolynomial1= ");
+      disp(head1);
+      printf("\nPolynomial2= ");
+      disp(head2); 
+      add(head1,head2,head3); 
+   }   
+   ---------------------------------------------------------------------------------------------------------------------------------------------------
+   SLIP 12
+   Q1
+    #include<stdio.h>
+int selection(int a[],int n)
+ {
+        int min,pos,i,j,t;
+        for(i=0;i<n-1;i++)
+          {
+            min=a[i];
+            pos=i;
+             for(j=i+1;j<n;j++)
+              {
+                   if(a[j]<min)
+                    {
+                        min=a[j];
+                        pos=j;
+                    }
+              }
+              t=a[i];
+              a[i]=a[pos];
+              a[pos]=t;
+          }
+ }
+int main()
+ {
+     int a[20],i,n;
+     printf("Enter limit= ");
+       scanf("%d",&n);
+    printf("Enter n numbers= ");
+      for(i=0;i<n;i++)  
+        scanf("%d",&a[i]);   
+    selection(a,n);
+    printf("Enter n numbers= ");
+     for(i=0;i<n;i++)
+       printf("%d\n",a[i]);
+    
+ } 
+ Q2
+ #include<stdio.h>
+#include<stdlib.h>
+ struct node
+  {
+     struct node *next,*prev;
+     int data;
+  };
+struct node *create(struct node *head)
+ {
+      int i,n;
+      struct node *temp,*newnode;
+      printf("Enter limit= ");
+        scanf("%d",&n);
+     printf("Enter number= ");
+     for(i=0;i<n;i++)
+      {
+          newnode=(struct node *)malloc(sizeof(struct node));
+          scanf("%d",&newnode->data);
+          newnode->next=NULL;
+          if(head==NULL)
+             head=temp=newnode;
+         else
+           {
+                temp->next=newnode;
+                newnode->prev=temp;
+                temp=newnode;
+           }    
+      } 
+      return head;  
+ }
+ void disp(struct node *head)
+  {
+     struct node *temp;
+     for(temp=head;temp!=NULL;temp=temp->next)
+       {
+            printf("%d\n",temp->data);
+       }
+  } 
+ void search(struct node *head)
+  {
+        struct node *temp;
+        int num,f=0;
+        printf("Enter a value to search= ");
+          scanf("%d",&num);
+        for(temp=head;temp->next!=NULL;temp=temp->next)
+          {
+             if((temp->data==num) && (temp->data<num))
+               {
+                   f=1;
+                   break;
+               }
+          }
+        if(f==1)
+          printf("Key found");
+       else
+          printf("Key not found");   
+  } 
+  int main()
+   {
+       struct node *head=NULL;
+       head=create(head);
+       printf("\nThe linked list= ");
+         disp(head);
+         search(head);
+   } 
+-------------------------------------------------------------------------------------------------------------------------------------------------------   
+   SLIP 13
+   Q1
+   #include<stdio.h>
+#include"stack.h"
+   int main()
+    {
+            int ch,num;
+            init();
+            do
+             {  
+                 printf("Enter your chioce= 1-push\n 2-full= ");
+                  scanf("%d",&ch);
+                switch(ch)
+                  {
+                     case 1:printf("Enter a key to push= ");
+                                  scanf("%d",&num);
+                                push(num);
+                                break;
+                     case 2:isfull();
+                                break;             
+                  }  
+             }while(ch<3);
+    }
+  Q2
+  #include<stdio.h>
+#include<stdlib.h>
+  struct node
+    {
+        int data;
+        struct node *next;
+    };
+  struct node *create(struct node *head)
+    {
+          struct node *newnode,*temp;
+          int i,n;
+          printf("Enter no of nodes= ");
+            scanf("%d",&n);
+         printf("Enter elements= ");
+          for(i=0;i<n;i++)
+            {
+                newnode=(struct node *)malloc(sizeof(struct node));
+                scanf("%d",&newnode->data);
+                newnode->next=head;
+                if(head==NULL)
+                 head=temp=newnode;
+               else
+                 {
+                    temp->next=newnode;
+                    temp=newnode;
+                    newnode->next=head; 
+                }  
+            }
+            return head;       
+    }
+  void disp(struct node *head)
+   {
+       struct node *temp=head;
+       do
+        {
+                printf("%d\n",temp->data);
+                temp=temp->next;
+        }while(temp!=head);
+   }
+  struct node *append(struct node *head,int num)
+    {
+          struct node *temp,*newnode;
+          newnode=(struct node *)malloc(sizeof(struct node));
+          newnode->data=num;
+          if(head==NULL)
+             {
+                  newnode->next=newnode;
+                  return newnode;
+             }
+         for(temp=head;temp->next!=head;temp=temp->next);
+          temp->next=newnode;
+          newnode->next=head;
+          return head;           
+    }
+   int main()
+    {
+          struct node *head=NULL;
+          int ch,num;
+          do
+           {
+                     printf("Enter your chioce= 1-create \n 2-disp \n 3-append= ");
+                        scanf("%d",&ch);
+                     switch(ch) 
+                      {
+                           case 1:head=create(head);
+                                      break;
+                            case 2:disp(head);
+                                       break;
+                            case 3:printf("Enter a element to append= ");
+                                             scanf("%d",&num); 
+                                         append(head,num);
+                                        break;                      
+                      }  
+           }while(ch<4);
+    }     
+ -----------------------------------------------------------------------------------------------------------------------------------------------------
+ SLIP 14
+ Q1
+ #include<stdio.h>
+  int main()
+   {
+        int a[10],i,n,key,f=0;
+        printf("Enter array elements= ");
+          scanf("%d",&n);
+       printf("Enter array elements= ");
+         for(i=0;i<n;i++)
+           {
+                   scanf("%d",&a[i]);
+           }
+         printf("Enter key to search= ");
+           scanf("%d",&key);
+        for(i=0;i<n;i++)
+         {
+              if(a[i]==key)
+               {
+                   f=1;
+                   break;
+               }
+         } 
+       if(f==1)
+         printf("Key found");   
+      else
+        printf("Key not found");         
+   }
+   Q2
+   #include<stdio.h>
+#include"queue.h"
+   int main()
+    {
+               int ch,num;
+               init();
+               do
+                {
+                     printf("Enter your chioce=1-add \n 2-del= ");
+                        scanf("%d",&ch);
+                     switch(ch)
+                       {
+                               case 1:printf("Enter a num to add=  ");
+                                             scanf("%d",&num);
+                                          add(num);
+                                          break;
+                              case 2:del(); 
+                                          break;                                                             
+                       }   
+                }while(ch<3);
+    }
+-----------------------------------------------------------------------------------------------------------------------------------------------
+SLIP 15
+Q1
+   #include<stdio.h>
+#include"stack.h"
+   int main()
+    {
+            int ch,num;
+            init();
+            do
+             {  
+                 printf("Enter your chioce= 1-push\n 2-full= ");
+                  scanf("%d",&ch);
+                switch(ch)
+                  {
+                     case 1:printf("Enter a key to push= ");
+                                  scanf("%d",&num);
+                                push(num);
+                                break;
+                     case 2:isempty();
+                                break;             
+                  }  
+             }while(ch<3);
+    }
+Q2
+ #include<stdio.h>
+#include<stdlib.h>
+ struct node
+  {
+     struct node *next;
+     int data;
+  };
+struct node *create(struct node *head)
+ {
+      int i,n;
+      struct node *temp,*newnode;
+      printf("Enter limit= ");
+        scanf("%d",&n);
+     printf("Enter number= ");
+     for(i=0;i<n;i++)
+      {
+          newnode=(struct node *)malloc(sizeof(struct node));
+          scanf("%d",&newnode->data);
+          newnode->next=NULL;
+          if(head==NULL)
+             head=temp=newnode;
+         else
+           {
+                temp->next=newnode;
+                temp=newnode;
+           }    
+      } 
+      return head;  
+ }
+ void disp(struct node *head)
+  {
+     struct node *temp;
+     for(temp=head;temp!=NULL;temp=temp->next)
+       {
+            printf("%d\n",temp->data);
+       }
+  } 
+int search(struct node *head)
+  {
+        struct node *temp;
+        int num,f=0;
+        printf("Enter a value to search= ");
+          scanf("%d",&num);
+        for(temp=head;temp->next!=NULL;temp=temp->next)
+          {
+             if((temp->data==num) || (temp->data<num))
+               {
+                   f=1;
+                   break;
+               }
+          }
+        if(f==1)
+          printf("Key found");
+       else
+          printf("Key not found");   
+  } 
+  int main()
+   {
+       struct node *head=NULL;
+       head=create(head);
+       printf("\nThe linked list= ");
+         disp(head);
+         printf("%d",search(head));
+   } 
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+SLIP 16
+Q1
+  #include <stdio.h>
+  #include"stack1.h"
+   int main()
+     {
+         int ch,num;
+         init();
+         do
+           {
+                  printf("Enter your chioce= 1-push \n 2-pop \n3-disp= ");
+                    scanf("%d",&ch);
+                  switch(ch)
+                   {
+                           case 1:printf("Enter a number to insert= ");
+                                      scanf("%d",&num);
+                                      push(num);
+                                      break;
+                            case 2:pop();
+                                       break;
+                            case 3:disp();
+                                      break;                     
+                   }  
+           }while(ch<3);         
+     } 
+  Q2
+#include<stdio.h>
+#include<stdlib.h>
+ struct node
+  {
+     struct node *next,*prev;
+     int data;
+  };
+struct node *create(struct node *head)
+ {
+      int i,n;
+      struct node *temp,*newnode;
+      printf("Enter limit= ");
+        scanf("%d",&n);
+     printf("Enter number= ");
+     for(i=0;i<n;i++)
+      {
+          newnode=(struct node *)malloc(sizeof(struct node));
+          scanf("%d",&newnode->data);
+          newnode->next=NULL;
+          if(head==NULL)
+             head=temp=newnode;
+         else
+           {
+                temp->next=newnode;
+                newnode->prev=temp;
+                temp=newnode;
+           }    
+      } 
+      return head;  
+ }
+ void disp(struct node *head)
+  {
+     struct node *temp;
+     for(temp=head;temp!=NULL;temp=temp->next)
+       {
+            printf("%d\n",temp->data);
+       }
+  } 
+ void search(struct node *head)
+  {
+        struct node *temp;
+        int num,f=0;
+        printf("Enter a value to search= ");
+          scanf("%d",&num);
+        for(temp=head;temp->next!=NULL;temp=temp->next)
+          {
+             if((temp->data==num) || (temp->data<num))
+               {
+                   f=1;
+                   break;
+               }
+          }
+        if(f==1)
+          printf("Key found");
+       else
+          printf("Key not found");   
+  } 
+  int main()
+   {
+       struct node *head=NULL;
+       head=create(head);
+       printf("\nThe linked list= ");
+         disp(head);
+         search(head);
+   } 
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+ SLIP   17
+ Q1
+   #include<stdio.h>
+#include"stack1.h"
+   int main()
+    {
+            int ch,num;
+            init();
+            do
+             {  
+                 printf("Enter your chioce= 1-push\n 2-peek= ");
+                  scanf("%d",&ch);
+                switch(ch)
+                  {
+                     case 1:printf("Enter a key to push= ");
+                                  scanf("%d",&num);
+                                push(num);
+                                break;
+                    case 2: peek();
+                              break;                 
+                  }  
+             }while(ch<3);
+    }
+Q2
+  #include<stdio.h>
+#include<stdlib.h>
+  struct node
+    {
+        int data;
+        struct node *next;
+    };
+  struct node *create(struct node *head)
+    {
+          struct node *newnode,*temp;
+          int i,n;
+          printf("Enter no of nodes= ");
+            scanf("%d",&n);
+         printf("Enter elements= ");
+          for(i=0;i<n;i++)
+            {
+                newnode=(struct node *)malloc(sizeof(struct node));
+                scanf("%d",&newnode->data);
+                newnode->next=head;
+                if(head==NULL)
+                 head=temp=newnode;
+               else
+                 {
+                    temp->next=newnode;
+                    temp=newnode;
+                    newnode->next=head; 
+                }  
+            }
+            return head;       
+    }
+  void disp(struct node *head)
+   {
+       struct node *temp=head;
+       do
+        {
+                printf("%d\n",temp->data);
+                temp=temp->next;
+        }while(temp!=head);
+   }
+  struct node *append(struct node *head,int num)
+    {
+          struct node *temp,*newnode;
+          newnode=(struct node *)malloc(sizeof(struct node));
+          newnode->data=num;
+          if(head==NULL)
+             {
+                  newnode->next=newnode;
+                  return newnode;
+             }
+         for(temp=head;temp->next!=head;temp=temp->next);
+          temp->next=newnode;
+          newnode->next=head;
+          return head;           
+    }
+   int main()
+    {
+          struct node *head=NULL;
+          int ch,num;
+          do
+           {
+                     printf("Enter your chioce= 1-create \n 2-disp \n 3-append= ");
+                        scanf("%d",&ch);
+                     switch(ch) 
+                      {
+                           case 1:head=create(head);
+                                      break;
+                            case 2:disp(head);
+                                       break;
+                            case 3:printf("Enter a element to append= ");
+                                             scanf("%d",&num); 
+                                         append(head,num);
+                                        break;                      
+                      }  
+           }while(ch<4);
+    }     
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+SLIP 18
+Q1
+#include<stdio.h>
+ int binary(int a[],int n, int key,int top,int mid,int bottom)
+   {
+         int i;
+         top=0;
+         bottom=n-1;
+         while(top<bottom)
+           {
+                  mid=(top+bottom)/2;
+                  if(a[mid]==key)
+                    {
+                     return mid;
+                    } 
+                  else if(key<a[mid])
+                     {
+                          return bottom=mid+1;
+                     }
+                 else 
+                     {
+                       return top=mid-1;
+                     }        
+           }
+         return -1;  
+   }
+   int main()
+     {
+             int a[100],i,n,key,pos,top,mid,bottom;
+         printf("Enter limit= ");
+           scanf("%d",&n);
+        printf("Enter n numbers= ");
+          for(i=0;i<n;i++)
+            {
+                   scanf("%d",&a[i]);
+            }
+            printf("Enter key to search= ");
+              scanf("%d",&key);
+            pos=binary(a,n,key,top,mid,bottom);
+        if(pos==-1)
+          {
+               printf("%d not found",key);
+              
+          }
+       else
+          {
+                printf("%d found at %d position",key,pos);
+          }        
+    } 
+   Q2
+   #include<stdio.h>
+#include<stdlib.h>
+  struct node
+   {
+      struct node *next,*prev;
+      int data;
+   };
+ struct node *create(struct node *head)
+   {
+         struct node *temp,*newnode;
+          int n,i;
+          printf("Enter limit= ");
+            scanf("%d",&n);
+         printf("Enter value= ");
+           for(i=0;i<n;i++)
+             {
+               newnode=(struct node *)malloc(sizeof(struct node));
+                scanf("%d",&newnode->data);
+                newnode->next=NULL;
+          if(head==NULL)
+            {
+                temp=head=newnode;
+            }     
+       else
+           {
+                  temp->next=newnode;
+                  newnode->prev=temp;
+                  temp=newnode;
+           }
+           }
+           return head;
+   }
+   void disp(struct node *head) 
+   {
+    struct node *temp = head;
+    while (temp != NULL) 
+    {
+        printf("%d\n", temp->data);
+        temp = temp->next;
+    }
+}
+void merge(struct node *head1,struct node *head2,struct node *head3)
+ {
+     struct node *temp1=head1,*temp2=head2,*temp3,*newnode;
+      while(temp1!=NULL && temp2!=NULL)
+        {
+             newnode=(struct node *)malloc(sizeof(struct node));
+             newnode->next=NULL;
+             if(temp1->data<temp2->data)
+               {
+                     newnode->data=temp1->data;
+                     temp1=temp1->next;
+               }
+          else 
+               {
+                     newnode->data=temp2->data;
+                     temp2=temp2->next;
+               }     
+         if(head3==NULL)
+             {
+                 head3=temp3=newnode;
+             }
+         else
+           {
+               temp3->next=newnode;
+               temp3=newnode;
+           }               
+    }
+    while(temp1!=NULL)
+      {
+              newnode=(struct node *)malloc(sizeof(struct node));
+              newnode->next=NULL;
+             newnode->data=temp1->data;
+             temp1=temp1->next;
+             temp3->next=newnode;
+             temp3=newnode;
+      }
+        while(temp2!=NULL)
+      {
+              newnode=(struct node *)malloc(sizeof(struct node));
+              newnode->next=NULL;
+             newnode->data=temp2->data;
+             temp2=temp2->next;
+             temp3->next=newnode;
+             temp3=newnode;
+      }
+      printf("Merged linked list= ");
+      disp(head3);  
+  } 
+  int main()
+   {
+             struct node *head1=NULL,*head2=NULL,*head3=NULL;
+             printf("Enter 1st ll= ");
+             head1=create(head1);
+             printf("Enter 2nd ll= ");
+             head2=create(head2); 
+             printf("Linked list first= ");
+             disp(head1);
+             printf("Linked list second= ");
+             disp(head2);
+             merge(head1,head2,head3);
+   } 
+------------------------------------------------------------------------------------------------------------------------------------------------   
+   SLIP 19
+   Q1
+     #include<stdio.h>
+#include"stack1.h"
+   int main()
+    {
+            int ch,num;
+            init();
+            do
+             {  
+                 printf("Enter your chioce= 1-push\n 2-peek= ");
+                  scanf("%d",&ch);
+                switch(ch)
+                  {
+                     case 1:printf("Enter a key to push= ");
+                                  scanf("%d",&num);
+                                push(num);
+                                break;
+                    case 2: peek();
+                              break;                 
+                  }  
+             }while(ch<3);
+    }
+ Q2
+ #include<stdio.h>
+#include<stdlib.h>
+struct node
+ {
+    int coef,pow;
+    struct node *next;
+ };
+struct node *create(struct node *head)
+ {
+    struct node *temp,*newnode;
+    int i,n;
+    printf("Enter no of nodes= ");
+      scanf("%d",&n);
+     for(i=0;i<n;i++)
+      {
+           newnode=(struct node *)malloc(sizeof(struct node));
+           printf("Enter coefficent and pow= ");
+             scanf("%d%d",&newnode->coef,&newnode->pow);
+           newnode->next=NULL;
+             if(head==NULL)
+              temp=head=newnode;
+            else
+              {
+                 temp->next=newnode;
+                 temp=newnode;                 
+              }  
+      }
+      return head;   
+ }
+ void disp(struct node *head)
+  {
+      struct node *temp;
+      for(temp=head;temp!=NULL;temp=temp->next)
+       {
+          printf("%dX^ %d+\t",temp->coef,temp->pow);
+       }
+  } 
+void add(struct node *head1,struct node *head2,struct node *head3)
+  {
+      struct node *temp1=head1,*temp2=head2,*temp3,*newnode;
+        while(temp1!=NULL && temp2!=NULL)
+          {
+              newnode=(struct node *)malloc(sizeof(struct node));
+              newnode->next=NULL;
+              if(temp1->pow>temp2->pow)
+               {
+                  newnode->coef=temp1->coef;
+                  newnode->pow=temp1->pow;
+                  temp1=temp1->next;
+               }
+             else if(temp1->pow<temp2->pow)
+               {
+                  newnode->coef=temp2->coef;
+                  newnode->pow=temp2->pow;
+                  temp2=temp2->next;
+               } 
+               else 
+               {
+                  newnode->coef=temp1->coef+temp2->coef;
+                  newnode->pow=temp2->pow;
+                  temp1=temp1->next;
+                  temp2=temp2->next;  
+               }
+               if(head3==NULL)
+                  head3=temp3=newnode;
+               else
+                 {
+                     temp3->next=newnode;
+                     temp3=newnode;
+                 }   
+          }
+         while(temp1!=NULL)
+           {
+              newnode=(struct node *)malloc(sizeof(struct node));
+              newnode->next=NULL;
+             newnode->coef=temp1->coef;
+                  newnode->pow=temp1->pow;
+                  temp1=temp1->next;
+                  temp3->next=newnode;
+                  temp3=newnode; 
+           } 
+         while(temp2!=NULL)
+           {
+              newnode=(struct node *)malloc(sizeof(struct node));
+              newnode->next=NULL;
+             newnode->coef=temp2->coef;
+                  newnode->pow=temp2->pow;
+                  temp2=temp2->next;
+                  temp3->next=newnode;
+                  temp3=newnode; 
+           }
+           disp(head3);            
+  }
+  void main()
+   {
+      struct node *head1=NULL,*head2=NULL,*head3=NULL;
+      printf("\nEnter Polynomail 1=");
+      head1=create(head1);
+      printf("\nEnter Polynomail 2=");
+      head2=create(head2);
+      printf("\nPolynomial1= ");
+      disp(head1);
+      printf("\nPolynomial2= ");
+      disp(head2); 
+      add(head1,head2,head3); 
+   }   
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+SLIP 20
+Q1
+#include<stdio.h>
+  void bubble(int a[],int n)
+   {
+         int t,pass,i;
+         for(pass=1;pass<n;pass++)
+          {
+             for(i=0;i<n-pass;i++)
+               {
+                  if(a[i]>a[i+1])
+                    {
+                       t=a[i];
+                       a[i]=a[i+1];
+                       a[i+1]=t;
+                    }
+               }
+          }
+   }
+  int main()
+   {
+       int a[10],i,n;
+        printf("Enter limit= ");
+          scanf("%d",&n);
+       printf("Enter array elements= ");
+        for(i=0;i<n;i++)
+         {
+            scanf("%d",&a[i]);
+         } 
+       bubble(a,n);
+        printf("Sorted array elements= ");
+        for(i=0;i<n;i++)
+         {
+            printf("%d\n",a[i]);
+         }     
+   } 
+Q2
+  #include<stdio.h>
+#include<stdlib.h>
+  struct node
+    {
+        int data;
+        struct node *next;
+    };
+  struct node *create(struct node *head)
+    {
+          struct node *newnode,*temp;
+          int i,n;
+          printf("Enter no of nodes= ");
+            scanf("%d",&n);
+         printf("Enter elements= ");
+          for(i=0;i<n;i++)
+            {
+                newnode=(struct node *)malloc(sizeof(struct node));
+                scanf("%d",&newnode->data);
+                newnode->next=head;
+                if(head==NULL)
+                 head=temp=newnode;
+               else
+                 {
+                    temp->next=newnode;
+                    temp=newnode;
+                    newnode->next=head; 
+                }  
+            }
+            return head;       
+    }
+  void disp(struct node *head)
+   {
+       struct node *temp=head;
+       do
+        {
+                printf("%d\n",temp->data);
+                temp=temp->next;
+        }while(temp!=head);
+   }
+  struct node *append(struct node *head,int num)
+    {
+          struct node *temp,*newnode;
+          newnode=(struct node *)malloc(sizeof(struct node));
+          newnode->data=num;
+          if(head==NULL)
+             {
+                  newnode->next=newnode;
+                  return newnode;
+             }
+         for(temp=head;temp->next!=head;temp=temp->next);
+          temp->next=newnode;
+          newnode->next=head;
+          return head;           
+    }
+   int main()
+    {
+          struct node *head=NULL;
+          int ch,num;
+          do
+           {
+                     printf("Enter your chioce= 1-create \n 2-disp \n 3-append= ");
+                        scanf("%d",&ch);
+                     switch(ch) 
+                      {
+                           case 1:head=create(head);
+                                      break;
+                            case 2:disp(head);
+                                       break;
+                            case 3:printf("Enter a element to append= ");
+                                             scanf("%d",&num); 
+                                         append(head,num);
+                                        break;                      
+                      }  
+           }while(ch<4);
+    }
